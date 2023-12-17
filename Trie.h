@@ -19,11 +19,10 @@ private:
     TrieNode* root;
 
     bool isEmpty(TrieNode* root);
-    TrieNode* remove(TrieNode* root, std::string key, int depth = 0);
     bool search_(std::string key);   
-    TrieNode* getNewNode();
     void printFrom(TrieNode* node, std::string word);
-
+    TrieNode* remove(TrieNode* root, std::string key, int depth = 0);
+    TrieNode* getNewNode();
 
 public:
     Trie();

@@ -13,10 +13,10 @@ Trie::~Trie()
 Trie::TrieNode* Trie::getNewNode()
 {
 
-    TrieNode* pNode = new TrieNode;         // ¬ыдел€ем пам€ть под новый узел
-    pNode->isEndOfWord = false;             // устанавливаем флаг конца слова в false
+    TrieNode* pNode = new TrieNode;         
+    pNode->isEndOfWord = false;
 
-    for (int i = 0; i < ALPHABET_SIZE; i++) // инициализируем детей нулевым указателем
+    for (int i = 0; i < ALPHABET_SIZE; i++)
         pNode->children[i] = nullptr;
 
     pNode->frequency = 0;
@@ -67,7 +67,6 @@ void Trie::search(std::string key)
         printf("%12s was found\n" , key.c_str());
     else
         printf("%12s was not found\n", key.c_str());
-
 }
 
 bool Trie::isEmpty(TrieNode* root)
@@ -83,7 +82,6 @@ Trie::TrieNode* Trie::remove(TrieNode* root, std::string key, int depth)
 
     if (!root)
         return nullptr;
-
 
     if (depth == key.size())
     {
@@ -157,12 +155,11 @@ void Trie::predict()
                 break;
         }
 
-        if (cnt != input.length())
+        if (cnt != input.length()) // if we didnt find input
         {
             printf("%12s no such word start found\n", input.c_str());
             continue;
         }
-
 
         std::cout << "\033[32m";
         printFrom(node, input);
@@ -176,15 +173,16 @@ void Trie::printFrom(TrieNode* node, std::string word)
     if (node->isEndOfWord)
     {
         printf("     %s", word.c_str());
-        return;
+
+        if(node->frequency == 1)
+            return;
     }
 
     for (int i = 0; i < ALPHABET_SIZE; i++)
-    {
         if (node->children[i] != nullptr)
         {
             word.push_back((char)i + 'a');
             printFrom(node->children[i], word);
+            word.pop_back();
         }
-    }
 }
