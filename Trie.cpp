@@ -146,7 +146,7 @@ void Trie::predict()
 
             int index = input[i] - 'a';
 
-            if ((node->children[index] != nullptr) && !(node->isEndOfWord))
+            if ((node->children[index] != nullptr))
             {
                 cnt++;
                 node = node->children[index];
